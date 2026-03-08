@@ -1,0 +1,59 @@
+name: New Rule Request
+description: Suggest a new analyzer rule for a zero-allocation pattern
+labels: [enhancement, new-rule]
+
+body:
+  - type: textarea
+    id: pattern
+    attributes:
+      label: Allocation pattern to detect
+      description: Describe the C# code pattern that causes unnecessary allocations
+      placeholder: |
+        Example:
+        `string.Concat(a, b, c)` in a loop allocates a new string each iteration
+    validations:
+      required: true
+
+  - type: textarea
+    id: violation
+    attributes:
+      label: Violation example
+      description: C# code that should trigger the diagnostic
+      render: csharp
+    validations:
+      required: true
+
+  - type: textarea
+    id: fix
+    attributes:
+      label: Suggested fix
+      description: C# code showing the zero/low-allocation alternative
+      render: csharp
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Suggested severity
+      options:
+        - Info (style suggestion)
+        - Warning (likely performance issue)
+        - Error (always wrong)
+    validations:
+      required: true
+
+  - type: input
+    id: min-tfm
+    attributes:
+      label: Minimum TFM
+      description: Does the fix require a specific .NET version?
+      placeholder: Any, net6.0, net8.0, etc.
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Links to benchmarks, blog posts, or documentation supporting this rule

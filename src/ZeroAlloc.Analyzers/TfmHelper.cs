@@ -48,5 +48,6 @@ internal static class TfmHelper
 
     public static bool IsNet5OrLater(string tfm) => IsNetOrLater(tfm, 5);
     public static bool IsNet6OrLater(string tfm) => IsNetOrLater(tfm, 6);
+    public static bool IsNet7OrLater(string tfm) => IsNetOrLater(tfm, 7);
     public static bool IsNet8OrLater(string tfm) => IsNetOrLater(tfm, 8);
 }
