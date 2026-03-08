@@ -1,0 +1,96 @@
+name: Bug Report
+description: Report a false positive, false negative, or crash in an analyzer rule
+labels: [bug]
+
+body:
+  - type: dropdown
+    id: rule
+    attributes:
+      label: Rule ID
+      description: Which analyzer rule is affected?
+      options:
+        - ZA0101 — Use FrozenDictionary
+        - ZA0102 — Use FrozenSet
+        - ZA0103 — Use CollectionsMarshal.AsSpan
+        - ZA0104 — Use SearchValues
+        - ZA0105 — Use TryGetValue
+        - ZA0106 — Avoid premature ToList
+        - ZA0107 — Pre-size collections
+        - ZA0201 — Avoid string concat in loops
+        - ZA0202 — Avoid string.Replace chains
+        - ZA0203 — Use AsSpan instead of Substring
+        - ZA0204 — Use string.Create
+        - ZA0205 — Use CompositeFormat
+        - ZA0206 — Avoid span.ToString() before Parse
+        - ZA0301 — Use stackalloc
+        - ZA0302 — Use ArrayPool
+        - ZA0401 — Use LoggerMessage
+        - ZA0501 — Avoid boxing in loops
+        - ZA0502 — Avoid closure in loops
+        - ZA0503 — Avoid boxing everywhere
+        - ZA0504 — Avoid defensive copies
+        - ZA0601 — Avoid LINQ in loops
+        - ZA0602 — Avoid params in loops
+        - ZA0603 — Use .Count/.Length property
+        - ZA0604 — Use .Count > 0 over .Any()
+        - ZA0605 — Use indexer over .First()/.Last()
+        - ZA0701 — Use GeneratedRegex
+        - ZA0801 — Avoid Enum.HasFlag
+        - ZA0802 — Avoid Enum.ToString()
+        - ZA0803 — Cache Enum.GetName/GetValues
+        - ZA0901 — Consider sealing class
+        - ZA1001 — Use JSON source generation
+        - ZA1101 — Elide async/await
+        - ZA1102 — Dispose CancellationTokenSource
+        - ZA1401 — Use static lambda
+        - ZA1501 — Override struct GetHashCode
+        - ZA1502 — Avoid finalizers
+        - Other / Unknown
+    validations:
+      required: true
+
+  - type: dropdown
+    id: bug-type
+    attributes:
+      label: Bug type
+      options:
+        - False positive (diagnostic reported where it shouldn't be)
+        - False negative (diagnostic NOT reported where it should be)
+        - Crash / analyzer exception
+        - Incorrect message or severity
+    validations:
+      required: true
+
+  - type: textarea
+    id: code
+    attributes:
+      label: Code that reproduces the issue
+      description: Minimal C# code that demonstrates the problem
+      render: csharp
+    validations:
+      required: true
+
+  - type: input
+    id: tfm
+    attributes:
+      label: Target Framework
+      description: e.g., net8.0, net6.0, netstandard2.0
+      placeholder: net8.0
+    validations:
+      required: true
+
+  - type: input
+    id: package-version
+    attributes:
+      label: Package version
+      placeholder: 1.0.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What should have happened?
+    validations:
+      required: true

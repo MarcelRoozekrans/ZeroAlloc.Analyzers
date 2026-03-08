@@ -16,10 +16,19 @@ public static class CSharpAnalyzerVerifier<TAnalyzer>
         string targetFramework = "net8.0",
         params DiagnosticResult[] expected)
     {
+        await VerifyAnalyzerAsync(source, targetFramework, ReferenceAssemblies.Net.Net80, expected);
+    }
+
+    public static async Task VerifyAnalyzerAsync(
+        string source,
+        string targetFramework,
+        ReferenceAssemblies referenceAssemblies,
+        params DiagnosticResult[] expected)
+    {
         var test = new CSharpAnalyzerTest<TAnalyzer, DefaultVerifier>
         {
             TestCode = source,
-            ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
+            ReferenceAssemblies = referenceAssemblies,
         };
 
         test.TestState.AnalyzerConfigFiles.Add(
@@ -37,5 +46,13 @@ public static class CSharpAnalyzerVerifier<TAnalyzer>
         string targetFramework = "net8.0")
     {
         await VerifyAnalyzerAsync(source, targetFramework);
+    }
+
+    public static async Task VerifyNoDiagnosticAsync(
+        string source,
+        string targetFramework,
+        ReferenceAssemblies referenceAssemblies)
+    {
+        await VerifyAnalyzerAsync(source, targetFramework, referenceAssemblies);
     }
 }
