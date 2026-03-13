@@ -32,6 +32,7 @@ ZA0206 | Performance.Strings | Info | AvoidSpanToStringBeforeParseAnalyzer
 ZA0603 | Performance.Linq | Info | UseCountPropertyAnalyzer
 ZA0604 | Performance.Linq | Info | UseCountOverAnyAnalyzer
 ZA0605 | Performance.Linq | Info | UseIndexerOverLinqFirstAnalyzer
+ZA0606 | Performance.Linq | Warning | AvoidForeachOverInterfaceCollectionAnalyzer
 ZA0803 | Performance.Enums | Info | CacheEnumGetNameAnalyzer
 ZA1101 | Performance.Async | Info | ElideAsyncAwaitAnalyzer
 ZA1102 | Performance.Async | Info | DisposeCancellationTokenSourceAnalyzer
