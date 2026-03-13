@@ -41,3 +41,4 @@ ZA1501 | Performance.ValueTypes | Info | OverrideStructGetHashCodeAnalyzer
 ZA1502 | Performance.ValueTypes | Info | AvoidFinalizersAnalyzer
 ZA0208 | Performance.Strings | Warning | AvoidStringJoinBoxingOverloadAnalyzer
 ZA0108 | Performance.Collections | Warning | AvoidRedundantMaterializationAnalyzer
+ZA0109 | Performance.Collections | Warning | AvoidZeroLengthArrayAllocationAnalyzer
