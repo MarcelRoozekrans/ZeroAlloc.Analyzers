@@ -32,9 +32,12 @@ ZA0206 | Performance.Strings | Info | AvoidSpanToStringBeforeParseAnalyzer
 ZA0603 | Performance.Linq | Info | UseCountPropertyAnalyzer
 ZA0604 | Performance.Linq | Info | UseCountOverAnyAnalyzer
 ZA0605 | Performance.Linq | Info | UseIndexerOverLinqFirstAnalyzer
+ZA0606 | Performance.Linq | Warning | AvoidForeachOverInterfaceCollectionAnalyzer
 ZA0803 | Performance.Enums | Info | CacheEnumGetNameAnalyzer
 ZA1101 | Performance.Async | Info | ElideAsyncAwaitAnalyzer
 ZA1102 | Performance.Async | Info | DisposeCancellationTokenSourceAnalyzer
 ZA1401 | Performance.Delegates | Info | UseStaticLambdaAnalyzer
 ZA1501 | Performance.ValueTypes | Info | OverrideStructGetHashCodeAnalyzer
 ZA1502 | Performance.ValueTypes | Info | AvoidFinalizersAnalyzer
+ZA0208 | Performance.Strings | Warning | AvoidStringJoinBoxingOverloadAnalyzer
+ZA0108 | Performance.Collections | Warning | AvoidRedundantMaterializationAnalyzer
