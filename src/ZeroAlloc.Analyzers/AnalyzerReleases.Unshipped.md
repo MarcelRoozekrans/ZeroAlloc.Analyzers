@@ -44,3 +44,4 @@ ZA0108 | Performance.Collections | Warning | AvoidRedundantMaterializationAnalyz
 ZA0109 | Performance.Collections | Warning | AvoidZeroLengthArrayAllocationAnalyzer
 ZA0209 | Performance.Strings | Warning | AvoidValueTypeBoxingInStringConcatAnalyzer
 ZA0607 | Performance.Linq | Warning | AvoidMultipleEnumerationAnalyzer
+ZA1104 | Performance.Async | Warning | AvoidSpanInAsyncMethodAnalyzer
