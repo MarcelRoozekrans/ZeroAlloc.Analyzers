@@ -35,4 +35,27 @@ public static class CSharpCodeFixVerifier<TAnalyzer, TCodeFix>
         test.ExpectedDiagnostics.Add(Diagnostic(diagnosticId).WithLocation(0));
         await test.RunAsync();
     }
+
+    public static async Task VerifyCodeFixAsync(
+        string source,
+        string fixedSource,
+        DiagnosticResult expected,
+        string targetFramework = "net8.0")
+    {
+        var test = new CSharpCodeFixTest<TAnalyzer, TCodeFix, DefaultVerifier>
+        {
+            TestCode = source,
+            FixedCode = fixedSource,
+            ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
+        };
+
+        test.TestState.AnalyzerConfigFiles.Add(
+            ("/.globalconfig", $"""
+                is_global = true
+                build_property.TargetFramework = {targetFramework}
+                """));
+
+        test.ExpectedDiagnostics.Add(expected);
+        await test.RunAsync();
+    }
 }
