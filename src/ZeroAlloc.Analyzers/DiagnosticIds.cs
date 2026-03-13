@@ -62,6 +62,7 @@ public static class DiagnosticIds
     // ZA11xx — Async
     public const string ElideAsyncAwait = "ZA1101";
     public const string DisposeCancellationTokenSource = "ZA1102";
+    // ZA1103 reserved — PreferValueTaskOverTask (dropped: not statically detectable)
     public const string AvoidSpanInAsyncMethod = "ZA1104";
 
     // ZA14xx — Delegates
