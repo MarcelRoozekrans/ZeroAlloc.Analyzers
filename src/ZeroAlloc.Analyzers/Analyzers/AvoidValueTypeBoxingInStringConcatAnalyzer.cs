@@ -37,12 +37,9 @@ public sealed class AvoidValueTypeBoxingInStringConcatAnalyzer : DiagnosticAnaly
             return;
 
         // Verify the operator resolves to string concatenation
-        var symbolInfo = context.SemanticModel.GetSymbolInfo(binary, context.CancellationToken);
-        if (symbolInfo.Symbol is IMethodSymbol method)
-        {
-            if (method.ContainingType?.SpecialType != SpecialType.System_String)
-                return;
-        }
+        if (context.SemanticModel.GetSymbolInfo(binary, context.CancellationToken).Symbol
+                is not IMethodSymbol { ContainingType.SpecialType: SpecialType.System_String })
+            return;
 
         bool leftIsString = leftType.SpecialType == SpecialType.System_String;
         bool rightIsString = rightType.SpecialType == SpecialType.System_String;
