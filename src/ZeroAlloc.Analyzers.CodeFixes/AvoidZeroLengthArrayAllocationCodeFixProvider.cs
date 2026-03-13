@@ -62,8 +62,14 @@ public sealed class AvoidZeroLengthArrayAllocationCodeFixProvider : CodeFixProvi
                 .Any(ns => ns.Usings.Any(u => u.Name?.ToString() == "System"));
         if (!hasSystemUsing)
         {
+            // Detect the document's line ending style from existing trivia to stay platform-neutral
+            var eol = root.DescendantTrivia()
+                .FirstOrDefault(t => t.IsKind(SyntaxKind.EndOfLineTrivia))
+                .ToFullString();
+            if (string.IsNullOrEmpty(eol)) eol = "\n";
+
             var usingDirective = SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName("System"))
-                .WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed, SyntaxFactory.CarriageReturnLineFeed);
+                .WithTrailingTrivia(SyntaxFactory.EndOfLine(eol), SyntaxFactory.EndOfLine(eol));
             newRoot = compilationUnit.AddUsings(usingDirective);
         }
 
