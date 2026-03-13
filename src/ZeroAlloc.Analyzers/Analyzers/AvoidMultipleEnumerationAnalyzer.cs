@@ -39,8 +39,10 @@ public sealed class AvoidMultipleEnumerationAnalyzer : DiagnosticAnalyzer
         if (method.Body is null && method.ExpressionBody is null)
             return;
 
-        // Collect all foreach statements in this method body
-        var foreachStatements = method.DescendantNodes()
+        // Collect all foreach statements in this method body, stopping at nested
+        // local functions and lambdas so their foreaches are not grouped with ours.
+        var foreachStatements = method.DescendantNodes(n =>
+                n is not LocalFunctionStatementSyntax and not LambdaExpressionSyntax)
             .OfType<ForEachStatementSyntax>()
             .ToImmutableArray();
 

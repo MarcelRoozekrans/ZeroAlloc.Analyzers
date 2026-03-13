@@ -170,6 +170,33 @@ public class ZA0607_AvoidMultipleEnumerationTests
     }
 
     [Fact]
+    public async Task IEnumerableLocalForeachInNestedLocalFunction_NoDiagnostic()
+    {
+        // A foreach inside a nested local function should not be grouped with
+        // foreaches in the outer method body.
+        var source = """
+            using System.Collections.Generic;
+
+            class C
+            {
+                void M(IEnumerable<int> source)
+                {
+                    IEnumerable<int> query = source;
+                    foreach (var x in query) { }
+
+                    void Inner()
+                    {
+                        foreach (var y in query) { }
+                    }
+                }
+            }
+            """;
+
+        await CSharpAnalyzerVerifier<AvoidMultipleEnumerationAnalyzer>
+            .VerifyNoDiagnosticAsync(source, "net8.0");
+    }
+
+    [Fact]
     public async Task TwoDifferentLocals_NoDiagnostic()
     {
         var source = """
